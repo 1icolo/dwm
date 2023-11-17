@@ -5,31 +5,39 @@ static const unsigned int borderpx = 1; /* border pixel of windows */
 static const unsigned int snap = 32;    /* snap pixel */
 static const int showbar = 1;           /* 0 means no bar */
 static const int topbar = 1;            /* 0 means bottom bar */
-static const unsigned int systraypinning =
-    0; /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor
-          X */
-static const unsigned int systrayonleft =
-    1; /* 0: systray in the right corner, >0: systray on left of status text */
+
+static const unsigned int systraypinning = 0; /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+// static const unsigned int systrayonleft =
+//     1; /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2; /* systray spacing */
-static const int systraypinningfailfirst =
-    1; /* 1: if pinning fails, display systray on the first monitor, False:
-          display systray on the last monitor*/
+static const int systraypinningfailfirst = 1; /* 1: if pinning fails, display systray on the first monitor, False:display systray on the last monitor*/
 static const int showsystray = 1; /* 0 means no systray */
+
 static const char *fonts[] = {"jetbrains-mono:size=11", "monospace:size=10"};
 static const char dmenufont[] = "jetbrains-mono:size=11";
-static const char col_gray1[] = "#202935";
-static const char col_gray2[] = "#202935";
-static const char col_gray3[] = "#b5b1aa";
-static const char col_gray4[] = "#d7d7d7";
-static const char col_gray5[] = "#d7d7d7";
-static const char col_cyan[] = "#5a4d30"; /* Highlight */
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
+
+static const char norm_fg[] = "#dedfe0"; // Text color 
+static const char norm_bg[] = "#14191e"; // Bar color
+static const char norm_border[] = "#9b9c9c"; // Unselected border
+//
+static const char sel_fg[] = "#7c8386"; // Selected Text color 
+static const char sel_bg[] = "#14191e"; // Selected Background
+static const char sel_border[] = "#252525"; //selected border; selected background dmenu 
+
+static const char urg_fg[] = "#dedfe0";
+static const char urg_bg[] = "#9A7A84";
+static const char urg_border[] = "#9A7A84";
+
 static const char *colors[][3] = {
     /*               fg         bg         border   */
-    [SchemeNorm] = {col_gray3, col_gray1, col_gray2},
-    [SchemeSel] = {col_gray4, col_gray1, col_cyan},
+    [SchemeNorm] = {norm_fg, norm_bg, norm_border},
+    [SchemeSel] = {sel_fg, sel_bg, sel_border},
+    [SchemeUrg] = {urg_fg, urg_bg, urg_border},
 };
+
+// #include "/home/janico/.cache/wal/colors-wal-dwm.h"
 
 static const unsigned int alphas[][3] = {
     /*               fg      bg        border*/
@@ -45,7 +53,7 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class      instance    title       tags mask     isfloating   monitor */
-    {"Gimp", NULL, NULL, 0, 1, -1},
+    // {"Gimp", NULL, NULL, 0, 1, -1},
     // { "Brave",  NULL,       NULL,       1 << 8,       0,           -1 },
     // { "Blueman-manager",  NULL,       NULL,       0,       1,           -1 },
     {"Pavucontrol", NULL, NULL, 0, 1, -1},
@@ -99,8 +107,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {
-    "dmenu_run", "-m",      dmenumon, "-fn",    dmenufont, "-nb",     col_gray1,
-    "-nf",       col_gray3, "-sb",    col_cyan, "-sf",     col_gray4, NULL};
+    "dmenu_run", "-m",      dmenumon, "-fn",    dmenufont, "-nb",     norm_bg,
+    "-nf",       norm_fg, "-sb",    sel_border, "-sf",     sel_fg, NULL};
 static const char *termcmd[] = {"kitty", NULL};
 static const char *filemgr[] = {"thunar", NULL};
 static const char *browser[] = {"firefox", NULL};
