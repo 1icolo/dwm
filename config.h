@@ -2,6 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx = 1; /* border pixel of windows */
+static const unsigned int gappx = 20; /* gap pixel of windows */
 static const unsigned int snap = 32;    /* snap pixel */
 static const int showbar = 1;           /* 0 means no bar */
 static const int topbar = 1;            /* 0 means bottom bar */
@@ -36,8 +37,7 @@ static const char *colors[][3] = {
     [SchemeSel] = {sel_fg, sel_bg, sel_border},
     [SchemeUrg] = {urg_fg, urg_bg, urg_border},
 };
-
-// #include "/home/janico/.cache/wal/colors-wal-dwm.h"
+// #include "/home/janico/.cache/wal/colors-wal-dwm.h" /* uncomment this for pywal */
 
 static const unsigned int alphas[][3] = {
     /*               fg      bg        border*/
@@ -150,6 +150,9 @@ static const Key keys[] = {
     {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
     {MODKEY, XK_f, setlayout, {.v = &layouts[1]}},
     {MODKEY, XK_m, setlayout, {.v = &layouts[2]}},
+    {MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
+    {MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
+    {MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
     {MODKEY, XK_space, setlayout, {0}},
     {MODKEY | ShiftMask, XK_space, togglefloating, {0}},
     {MODKEY, XK_0, view, {.ui = ~0}},
